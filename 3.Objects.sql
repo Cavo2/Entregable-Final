@@ -1,8 +1,8 @@
 -- Objects creation
 
-use first_task;
+USE first_task;
 
--- Vista 1
+-- Vista 1: Visualizador de 3 items mas caros del juego
 
 DROP VIEW IF EXISTS Player_Items_View;
 
@@ -22,7 +22,7 @@ ORDER BY -- Ordenar los precios de los items y mostrar los 3 mas caros
 	vi.Price DESC
 LIMIT 3;
 
--- Vista 2
+-- Vista 2: Resumen de la actividad económica de los ítems virtuales
 
 DROP VIEW IF EXISTS Item_Economic_Activity_View;
 
@@ -40,10 +40,69 @@ GROUP BY
 ORDER BY
 	Total_Revenue DESC;
 
+-- Vista 3: Resumen Financiero por Jugador
+
+CREATE VIEW Player_Financial_Summary AS
+SELECT 
+    p.ID_player,
+    p.name AS player_name,
+    SUM(CASE WHEN ft.transaction_type = 'Deposit' THEN ft.amount ELSE 0 END) AS total_deposited,
+    SUM(CASE WHEN ft.transaction_type = 'Purchase' THEN ft.amount ELSE 0 END) AS total_spent,
+    COUNT(ft.ID_transaction) AS transaction_count
+FROM 
+    Players p
+LEFT JOIN 
+    Financial_Transactions ft ON p.ID_player = ft.ID_player
+GROUP BY 
+    p.ID_player;
+
+-- Vista 4: Información de Jugadores y Sus Artículos Virtuales
+    
+CREATE VIEW Player_Virtual_Items AS
+SELECT 
+    p.ID_player,
+    p.name AS player_name,
+    p.email,
+    p.registration_Date,
+    COUNT(vi.ID_item) AS total_items,
+    GROUP_CONCAT(CONCAT(vi.item_name, ' (', vi.category, ')') ORDER BY vi.price DESC SEPARATOR ', ') AS items_list,
+    SUM(vi.price) AS total_value
+FROM 
+    Players p
+LEFT JOIN 
+    Virtual_Items vi ON p.ID_player = vi.ID_player
+GROUP BY 
+    p.ID_player;
+    
+-- Vista 5: Log de Transacciones Financieras
+
+CREATE VIEW Financial_Transaction_Log AS
+SELECT 
+    ft.ID_transaction,
+    p.name AS player_name,
+    ft.transaction_type,
+    ft.date_time,
+    ft.amount,
+    ft.currency,
+    ft.payment_method,
+    ft.transaction_status,
+    CASE 
+        WHEN ft.transaction_status = 'Completed' THEN 'Transaction Successful'
+        WHEN ft.transaction_status = 'Pending' THEN 'Awaiting Confirmation'
+        ELSE 'Transaction Failed'
+    END AS transaction_message
+FROM 
+    Financial_Transactions ft
+JOIN 
+    Players p ON ft.ID_player = p.ID_player
+ORDER BY 
+    ft.date_time DESC;
 
 
 
--- Funcion 1
+
+
+-- Funcion 1: Total Gasto de jugador
 
 DROP FUNCTION IF EXISTS Get_Total_Spending;
 
@@ -62,7 +121,7 @@ END //
 DELIMITER ;
 
 
--- Funcion 2
+-- Funcion 2: Análisis de gasto de jugador
 
 DROP FUNCTION IF EXISTS Get_Average_Spending_Status;
 
@@ -99,7 +158,7 @@ DELIMITER ;
 
 
 
--- Procedimiento 1
+-- Procedimiento 1: Permite actualizar ticket de soporte
 
 DROP PROCEDURE IF EXISTS Update_Support_Ticket_Status;
 
@@ -115,7 +174,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- Procedimiento 2
+-- Procedimiento 2: Registra una transacción en el sistema
 
  DROP PROCEDURE IF EXISTS Register_Transaction;
 
@@ -151,7 +210,7 @@ DELIMITER ;
 
 
 
--- Trigger 1
+-- Trigger 1: Valida que el monto no sea negativo antes de insertarse en la tabla de transacciones
 
 DROP TRIGGER IF EXISTS Validate_Transaction_Amount;
 
@@ -169,7 +228,7 @@ DELIMITER ;
 
 
 
--- Trigger 2
+-- Trigger 2: Valida que el método de pago es válido para la tabla de transacciones.
 
 DROP TRIGGER IF EXISTS Validate_Payment_Method;
 
