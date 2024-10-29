@@ -276,7 +276,7 @@ CREATE TRIGGER Audit_Support_Ticket
 AFTER INSERT ON Support_and_Customer_Service
 FOR EACH ROW
 BEGIN
-    INSERT INTO Audit_Support_Service (ID_ticket, Action, Change_Date, Previous_Status, New_Status)
+    INSERT INTO Audit_Support_Service (ID_ticket, done_action, change_date, previous_status, new_status)
     VALUES (NEW.ID_ticket, 'Create', NOW(), NULL, NEW.ticket_status);
 END //
 DELIMITER ;
