@@ -168,15 +168,27 @@ CREATE PROCEDURE Update_Support_Ticket_Status(
     IN p_New_Status ENUM('Open', 'In Progress', 'Resolved', 'Closed')
 )
 BEGIN
+    -- Iniciar la transacción
+    START TRANSACTION;
+
+    -- Intentar actualizar el estado del ticket
     UPDATE Support_and_Customer_Service
-    SET Ticket_Status = p_New_Status, Last_Updated_Date = NOW() -- Actualizar el status del ticket y establecer el ultimo tiempo de actualizacion al momento
+    SET Ticket_Status = p_New_Status, Last_Updated_Date = NOW()
     WHERE ID_Ticket = p_ID_Ticket;
+
+    -- Verificar si se actualizó alguna fila
+    IF ROW_COUNT() = 0 THEN
+        ROLLBACK;  -- Hacer rollback si no se actualizó nada
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El ticket no existe';
+    ELSE
+        COMMIT;  -- Confirmar la transacción si se actualizó
+    END IF;
 END //
 DELIMITER ;
 
 -- Procedimiento 2: Registra una transacción en el sistema
 
- DROP PROCEDURE IF EXISTS Register_Transaction;
+DROP PROCEDURE IF EXISTS Register_Transaction;
 
 DELIMITER //
 CREATE PROCEDURE Register_Transaction(
@@ -187,22 +199,23 @@ CREATE PROCEDURE Register_Transaction(
     IN p_Payment_Method VARCHAR(50)
 )
 BEGIN
-    DECLARE total_spent DECIMAL(10, 2);
-    DECLARE player_exists INT;
+    -- Inicio de la transacción
+    START TRANSACTION;
 
-
-    SELECT COUNT(*) INTO player_exists -- Verificar si el jugador existe
-    FROM Players
-    WHERE ID_Player = p_ID_Player;
-
-    IF player_exists = 0 THEN
+    -- Verificar si el jugador existe
+    IF (SELECT COUNT(*) FROM Players WHERE ID_Player = p_ID_Player) = 0 THEN
+        ROLLBACK;
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El jugador no existe.';
     ELSEIF p_Amount <= 0 THEN
+        ROLLBACK;
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El monto debe ser mayor que cero.';
     ELSE
         -- Registrar la transacción
         INSERT INTO Financial_Transactions (ID_Player, Transaction_Type, Date_Time, Amount, Currency, Payment_Method, Transaction_Status)
         VALUES (p_ID_Player, p_Transaction_Type, NOW(), p_Amount, p_Currency, p_Payment_Method, 'Completed');
+
+        -- Confirmar la transacción
+        COMMIT;
     END IF;
 END //
 DELIMITER ;
