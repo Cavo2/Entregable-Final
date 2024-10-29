@@ -8,7 +8,7 @@ CREATE TABLE Players (
     player_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     pass VARCHAR(255) NOT NULL,
-    registration_Date DATETIME DEFAULT CURRENT_TIMESTAMP
+    registration_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Crear la tabla Characters
