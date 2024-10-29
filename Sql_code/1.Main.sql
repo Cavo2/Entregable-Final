@@ -73,7 +73,7 @@ CREATE TABLE Achiev_Players (
     ID_achievement INT,
     ID_player INT,
     date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (ID_achievement, ID_player, date)
+    PRIMARY KEY (ID_achievement, ID_player, date_time)
 );
 
 -- Crear la tabla Quests
