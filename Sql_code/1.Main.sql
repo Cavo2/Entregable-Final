@@ -153,6 +153,16 @@ CREATE TABLE Game_Sessions (
     FOREIGN KEY (ID_character) REFERENCES Characters(ID_character)
 );
 
+CREATE TABLE Audit_Support_Service (
+    Audit_ID INT PRIMARY KEY AUTO_INCREMENT,
+    ID_ticket INT,
+    Action ENUM('Create', 'Update', 'Close') NOT NULL,
+    Change_Date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Previous_Status ENUM('Open', 'In Progress', 'Resolved', 'Closed'),  -- Estado anterior del ticket
+    New_Status ENUM('Open', 'In Progress', 'Resolved', 'Closed'),  -- Nuevo estado del ticket
+    FOREIGN KEY (ID_ticket) REFERENCES Support_and_Customer_Service(ID_ticket)
+);
+
 
 
 
