@@ -64,7 +64,7 @@ CREATE TABLE Financial_Transactions (
 CREATE TABLE Achievements (
     ID_achievement INT PRIMARY KEY AUTO_INCREMENT,
     achievement_name VARCHAR(100) NOT NULL,
-    description TEXT,
+    achiev_description TEXT,
     rewards TEXT,
     difficulty_level INT
 );
@@ -80,7 +80,7 @@ CREATE TABLE Achiev_Players (
 CREATE TABLE Quests (
     ID_quest INT PRIMARY KEY AUTO_INCREMENT,
     quest_name VARCHAR(100) NOT NULL,
-    description TEXT,
+    quest_description TEXT,
     reward TEXT,
     level_required INT
 );
@@ -117,7 +117,7 @@ CREATE TABLE Virtual_Items (
     ID_item INT PRIMARY KEY AUTO_INCREMENT,
     ID_player INT,
     item_name VARCHAR(100) NOT NULL,
-    description TEXT,
+    item_description TEXT,
     price DECIMAL(10, 2),
     category TEXT
 );
