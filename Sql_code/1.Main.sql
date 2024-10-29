@@ -5,9 +5,9 @@ USE first_task;
 -- Crear la tabla Players
 CREATE TABLE Players (
     ID_player INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
+    player_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
+    pass VARCHAR(255) NOT NULL,
     registration_Date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE Characters (
     ID_character INT PRIMARY KEY AUTO_INCREMENT,
     ID_player INT,
     character_name VARCHAR(50) NOT NULL,
-    level INT DEFAULT 1,
+    character_level INT DEFAULT 1,
     experience INT DEFAULT 0,
     class VARCHAR(50),
     health INT DEFAULT 100,
@@ -72,7 +72,7 @@ CREATE TABLE Achievements (
 CREATE TABLE Achiev_Players (
     ID_achievement INT,
     ID_player INT,
-    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (ID_achievement, ID_player, date)
 );
 
