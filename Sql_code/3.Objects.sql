@@ -8,12 +8,12 @@ DROP VIEW IF EXISTS Player_Items_View;
 
 CREATE VIEW Player_Items_View AS 
 SELECT
-    vi.Item_Name, 
-    vi.Description, 
-    vi.Price, 
-    vi.Category,
-    p.Name,
-    p.ID_Player
+    vi.item_name, 
+    vi.item_description, 
+    vi.price, 
+    vi.category,
+    p.player_name,
+    p.ID_player
 FROM
 	Players p 
 LEFT JOIN
@@ -28,9 +28,9 @@ DROP VIEW IF EXISTS Item_Economic_Activity_View;
 
 CREATE VIEW Item_Economic_Activity_View AS 
 SELECT
-	vi.Item_Name,
-    COUNT( ft.ID_Transaction ) AS Transaction_Count, -- Contar el numero de transacciones del item
-    SUM( ft.Amount ) AS Total_Revenue -- Sumar el numero de dinero recaudado
+	vi.item_name,
+    COUNT( ft.ID_transaction ) AS Transaction_Count, -- Contar el numero de transacciones del item
+    SUM( ft.amount ) AS Total_Revenue -- Sumar el numero de dinero recaudado
 FROM
 	Virtual_Items vi
 LEFT JOIN
@@ -42,10 +42,12 @@ ORDER BY
 
 -- Vista 3: Resumen Financiero por Jugador
 
+DROP VIEW IF EXISTS Player_Financial_Summary;
+
 CREATE VIEW Player_Financial_Summary AS
 SELECT 
     p.ID_player,
-    p.name AS player_name,
+    p.player_name,
     SUM(CASE WHEN ft.transaction_type = 'Deposit' THEN ft.amount ELSE 0 END) AS total_deposited,
     SUM(CASE WHEN ft.transaction_type = 'Purchase' THEN ft.amount ELSE 0 END) AS total_spent,
     COUNT(ft.ID_transaction) AS transaction_count
@@ -58,12 +60,14 @@ GROUP BY
 
 -- Vista 4: Información de Jugadores y Sus Artículos Virtuales
     
+DROP VIEW IF EXISTS Player_Virtual_Items;
+    
 CREATE VIEW Player_Virtual_Items AS
 SELECT 
     p.ID_player,
-    p.name AS player_name,
+    p.player_name,
     p.email,
-    p.registration_Date,
+    p.registration_date,
     COUNT(vi.ID_item) AS total_items,
     GROUP_CONCAT(CONCAT(vi.item_name, ' (', vi.category, ')') ORDER BY vi.price DESC SEPARATOR ', ') AS items_list,
     SUM(vi.price) AS total_value
@@ -76,10 +80,12 @@ GROUP BY
     
 -- Vista 5: Log de Transacciones Financieras
 
+DROP VIEW IF EXISTS Financial_Transaction_Log;
+
 CREATE VIEW Financial_Transaction_Log AS
 SELECT 
     ft.ID_transaction,
-    p.name AS player_name,
+    p.player_name,
     ft.transaction_type,
     ft.date_time,
     ft.amount,
@@ -112,9 +118,9 @@ RETURNS DECIMAL( 10, 2 ) DETERMINISTIC READS SQL DATA
 BEGIN
 	DECLARE total_spent DECIMAL( 10, 2 );
     
-    SELECT SUM( Amount ) INTO total_spent -- Sumar todas las transacciones del jugador
+    SELECT SUM( amount ) INTO total_spent -- Sumar todas las transacciones del jugador
     FROM Financial_Transactions
-    WHERE ID_Player = p_ID_Player;
+    WHERE ID_player = p_ID_Player;
     
     RETURN total_spent;
 END //
@@ -135,9 +141,9 @@ BEGIN
     DECLARE overall_average DECIMAL( 10, 2 );
     DECLARE status_message VARCHAR( 255 );
 
-    SELECT AVG( Amount ) INTO player_average -- Calcular el gasto promedio del jugador
+    SELECT AVG( amount ) INTO player_average -- Calcular el gasto promedio del jugador
     FROM Financial_Transactions
-    WHERE ID_Player = p_ID_Player;
+    WHERE ID_player = p_ID_Player;
 
     SELECT AVG( Amount ) INTO overall_average -- Calcular el gasto promedio general
     FROM Financial_Transactions;
