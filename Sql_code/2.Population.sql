@@ -1,143 +1,207 @@
-USE first_task;
+-- Insertar registros en Players
+INSERT INTO Players (player_name, email, pass) VALUES
+('Alice', 'alice@example.com', 'password1'),
+('Bob', 'bob@example.com', 'password2'),
+('Charlie', 'charlie@example.com', 'password3'),
+('Diana', 'diana@example.com', 'password4'),
+('Evan', 'evan@example.com', 'password5'),
+('Fiona', 'fiona@example.com', 'password6'),
+('George', 'george@example.com', 'password7'),
+('Hannah', 'hannah@example.com', 'password8'),
+('Ian', 'ian@example.com', 'password9'),
+('Jack', 'jack@example.com', 'password10');
 
--- Población de la tabla Players
-INSERT INTO Players (player_name, email, pass) VALUES 
-('Juan Pérez', 'juan.perez@example.com', 'password123'),
-('María López', 'maria.lopez@example.com', 'password456'),
-('Carlos González', 'carlos.gonzalez@example.com', 'password789'),
-('Ana Martínez', 'ana.martinez@example.com', 'password321'),
-('Luis Fernández', 'luis.fernandez@example.com', 'password654'),
-('Sofía Torres', 'sofia.torres@example.com', 'password987'),
-('Javier Ramírez', 'javier.ramirez@example.com', 'password159'),
-('Clara Jiménez', 'clara.jimenez@example.com', 'password753'),
-('Diego Ortega', 'diego.ortega@example.com', 'password852'),
-('Lucía Romero', 'lucia.romero@example.com', 'password147');
+-- Insertar registros en Characters
+INSERT INTO Characters (ID_player, character_name, class) VALUES
+(1, 'Warrior1', 'Warrior'),
+(1, 'Mage1', 'Mage'),
+(2, 'Rogue1', 'Rogue'),
+(2, 'Cleric1', 'Cleric'),
+(3, 'Warrior2', 'Warrior'),
+(3, 'Mage2', 'Mage'),
+(4, 'Rogue2', 'Rogue'),
+(4, 'Cleric2', 'Cleric'),
+(5, 'Warrior3', 'Warrior'),
+(5, 'Mage3', 'Mage');
 
--- Población de la tabla Characters
-INSERT INTO Characters (ID_player, character_name, character_level, experience, class, health, mana) VALUES 
-(1, 'Guerrero de la Luz', 5, 1500, 'Guerrero', 120, 80),
-(1, 'Maga Oscura', 3, 800, 'Mago', 100, 150),
-(2, 'Exploradora del Bosque', 4, 1200, 'Explorador', 110, 90),
-(3, 'Caballero de la Noche', 6, 2000, 'Caballero', 130, 70),
-(4, 'Hechicera', 2, 500, 'Hechicero', 90, 160),
-(5, 'Asesina Silenciosa', 3, 900, 'Asesino', 95, 85),
-(6, 'Guardian de la Selva', 4, 1100, 'Guardián', 115, 75),
-(7, 'Místico', 2, 400, 'Místico', 80, 120),
-(8, 'Paladín', 7, 2500, 'Paladín', 150, 60),
-(9, 'Cazador de Demonios', 5, 1800, 'Cazador', 125, 65);
+-- Insertar registros en Player_Stats
+INSERT INTO Player_Stats (ID_player, total_playtime, total_quests_completed, total_fights_won, total_fights_lost) VALUES
+(1, 120, 5, 10, 2),
+(2, 150, 6, 12, 3),
+(3, 80, 3, 7, 1),
+(4, 200, 10, 15, 5),
+(5, 60, 2, 3, 0),
+(6, 90, 4, 8, 4),
+(7, 180, 9, 14, 2),
+(8, 110, 7, 11, 4),
+(9, 130, 8, 13, 3),
+(10, 70, 1, 2, 1);
 
--- Población de la tabla Player_Stats
-INSERT INTO Player_Stats (ID_player, total_playtime, total_quests_completed, total_fights_won, total_fights_lost) VALUES 
-(1, 300, 15, 10, 5),
-(2, 200, 10, 5, 5),
-(3, 400, 20, 15, 5),
-(4, 150, 5, 2, 3),
-(5, 250, 12, 8, 4),
-(6, 350, 18, 12, 6),
-(7, 180, 7, 4, 3),
-(8, 400, 25, 20, 5),
-(9, 275, 11, 9, 2),
-(10, 320, 14, 10, 4);
+-- Insertar registros en Support_and_Customer_Service
+INSERT INTO Support_and_Customer_Service (ID_player, problem_category, problem_description, priority, ticket_status) VALUES
+(1, 'Login Issue', 'Unable to log in.', 'High', 'Open'),
+(2, 'Payment Problem', 'Transaction failed.', 'Medium', 'In Progress'),
+(3, 'Bug Report', 'Character is stuck.', 'Low', 'Resolved'),
+(4, 'Gameplay', 'Need help with quest.', 'Medium', 'Closed'),
+(5, 'Account', 'Forgot password.', 'High', 'Open'),
+(6, 'Feedback', 'Suggestions for improvement.', 'Low', 'In Progress'),
+(7, 'Technical', 'Game crashes on startup.', 'High', 'Open'),
+(8, 'Billing', 'Incorrect charges.', 'Medium', 'Resolved'),
+(9, 'Gameplay', 'Quest not showing.', 'Low', 'Closed'),
+(10, 'Account', 'Update email address.', 'Medium', 'Open');
 
--- Población de la tabla Support_and_Customer_Service
-INSERT INTO Support_and_Customer_Service (ID_player, problem_category, problem_description, priority, ticket_status) VALUES 
-(1, 'Cuenta', 'No puedo acceder a mi cuenta', 'High', 'Open'),
-(2, 'Compra', 'Problema con una compra reciente', 'Medium', 'In Progress'),
-(3, 'Error técnico', 'El juego se cierra inesperadamente', 'Low', 'Resolved'),
-(4, 'Sugerencia', 'Me gustaría sugerir una nueva misión', 'Low', 'Closed'),
-(5, 'Cuenta', 'Olvidé mi contraseña', 'High', 'Open'),
-(6, 'Compra', 'No recibí el artículo comprado', 'Medium', 'In Progress'),
-(7, 'Error técnico', 'Problemas de conexión', 'Low', 'Resolved'),
-(8, 'Sugerencia', 'Incluir más misiones para niveles altos', 'Medium', 'Closed'),
-(9, 'Cuenta', 'No puedo cambiar mi email', 'High', 'Open'),
-(10, 'Compra', 'Dudas sobre la tienda', 'Low', 'In Progress');
-
--- Población de la tabla Financial_Transactions
-INSERT INTO Financial_Transactions (ID_player, transaction_type, amount, currency, payment_method, transaction_status) VALUES 
-(1, 'Deposit', 50.00, 'USD', 'Tarjeta de crédito', 'Completed'),
+-- Insertar registros en Financial_Transactions
+INSERT INTO Financial_Transactions (ID_player, transaction_type, amount, currency, payment_method, transaction_status) VALUES
+(1, 'Deposit', 50.00, 'USD', 'Credit Card', 'Completed'),
 (2, 'Purchase', 20.00, 'USD', 'PayPal', 'Completed'),
-(3, 'Deposit', 100.00, 'USD', 'Transferencia bancaria', 'Pending'),
-(4, 'Purchase', 10.00, 'USD', 'Tarjeta de crédito', 'Failed'),
-(5, 'Deposit', 75.00, 'USD', 'Tarjeta de débito', 'Completed'),
-(6, 'Purchase', 30.00, 'USD', 'PayPal', 'Completed'),
-(7, 'Deposit', 40.00, 'USD', 'Tarjeta de crédito', 'Completed'),
-(8, 'Purchase', 15.00, 'USD', 'Transferencia bancaria', 'Completed'),
-(9, 'Deposit', 60.00, 'USD', 'Tarjeta de débito', 'Pending'),
-(10, 'Purchase', 25.00, 'USD', 'Tarjeta de crédito', 'Completed');
+(3, 'Deposit', 30.00, 'USD', 'Bank Transfer', 'Pending'),
+(4, 'Purchase', 15.00, 'USD', 'Credit Card', 'Completed'),
+(5, 'Deposit', 40.00, 'USD', 'Debit Card', 'Failed'),
+(6, 'Purchase', 10.00, 'USD', 'PayPal', 'Completed'),
+(7, 'Deposit', 60.00, 'USD', 'Credit Card', 'Completed'),
+(8, 'Purchase', 25.00, 'USD', 'Bank Transfer', 'Pending'),
+(9, 'Deposit', 70.00, 'USD', 'Debit Card', 'Completed'),
+(10, 'Purchase', 5.00, 'USD', 'Credit Card', 'Completed');
 
--- Población de la tabla Achievements
-INSERT INTO Achievements (achievement_name, achiev_description, rewards, difficulty_level) VALUES 
-('Primeros Pasos', 'Completa tu primera misión', '50 puntos de experiencia', 1),
-('Guerrero Legendario', 'Gana 50 combates', '100 monedas', 2),
-('Maestro de la Magia', 'Alcanza nivel 10 como Mago', 'Acceso a hechizos avanzados', 3),
-('Explorador Novato', 'Descubre 5 áreas nuevas', '200 monedas', 1),
-('Cazador de Bestias', 'Derrota 10 criaturas', '300 monedas', 2),
-('Rey del Juego', 'Alcanza el nivel máximo', '500 monedas', 4),
-('Amigo de Todos', 'Completa 10 misiones cooperativas', '400 monedas', 3),
-('Gran Estratega', 'Gana 20 combates en modo estratégico', '350 monedas', 2),
-('Superviviente', 'Sobrevive 100 minutos en el juego', '250 monedas', 1),
-('Faro de Luz', 'Asiste a 5 eventos del juego', '600 monedas', 2);
+-- Insertar registros en Achievements
+INSERT INTO Achievements (achievement_name, achiev_description, rewards, difficulty_level) VALUES
+('First Blood', 'Win your first fight.', '100 XP', 1),
+('Quest Master', 'Complete 10 quests.', '500 XP', 2),
+('Warrior of the Year', 'Win 50 fights.', '2000 XP', 3),
+('Explorer', 'Discover all zones.', '300 XP', 2),
+('Treasure Hunter', 'Find 5 rare items.', '400 XP', 3),
+('Master Trader', 'Make 10 transactions.', '200 XP', 2),
+('Champion', 'Achieve level 10 with a character.', '1000 XP', 4),
+('Team Player', 'Join a guild.', '150 XP', 1),
+('Pioneer', 'Complete a quest within a day.', '300 XP', 3),
+('Strategist', 'Win a fight without losing health.', '500 XP', 4);
 
--- Población de la tabla Achiev_Players
-INSERT INTO Achiev_Players (ID_achievement, ID_player, date_time) VALUES 
-(1, 1, NOW()),
-(2, 1, NOW()),
-(3, 2, NOW()),
-(1, 2, NOW()),
-(4, 3, NOW()),
-(5, 3, NOW()),
-(2, 4, NOW()),
-(1, 5, NOW()),
-(6, 6, NOW()),
-(7, 7, NOW()),
-(8, 8, NOW()),
-(9, 9, NOW()),
-(10, 10, NOW());
+-- Insertar registros en Achiev_Players
+INSERT INTO Achiev_Players (ID_achievement, ID_player) VALUES
+(1, 1),
+(2, 1),
+(3, 2),
+(4, 3),
+(5, 4),
+(6, 5),
+(1, 6),
+(2, 7),
+(3, 8),
+(4, 9);
 
--- Población de la tabla Quests
-INSERT INTO Quests (quest_name, quest_description, reward, level_required) VALUES 
-('El comienzo', 'Completa la misión inicial.', '100 monedas', 1),
-('Enfrentando al dragón', 'Derrota al dragón de la montaña.', '500 monedas', 5),
-('Rescate en el pueblo', 'Ayuda a los aldeanos a recuperar sus pertenencias.', '300 monedas', 2),
-('La búsqueda del artefacto', 'Encuentra el artefacto perdido.', '700 monedas', 4),
-('Cazador de Monstruos', 'Caza 5 monstruos en la selva.', '250 monedas', 3),
-('Misterio en el Castillo', 'Resuelve el misterio del castillo encantado.', '400 monedas', 5),
-('El Laberinto', 'Escapa del laberinto sin ser atrapado.', '600 monedas', 4),
-('Batalla en el Campo', 'Participa en una batalla masiva.', '800 monedas', 6),
-('Viaje a la Montaña', 'Sube a la montaña más alta.', '300 monedas', 3),
-('Alianza con los Elfos', 'Forma una alianza con los elfos del bosque.', '500 monedas', 5);
+-- Insertar registros en Quests
+INSERT INTO Quests (quest_name, quest_description, reward, level_required) VALUES
+('The Lost Sword', 'Find the lost sword in the ancient ruins.', '500 Gold', 1),
+('Dragon Slaying', 'Defeat the dragon in the mountains.', '1000 Gold', 5),
+('Rescue the Princess', 'Save the princess from the castle.', '1500 Gold', 3),
+('Treasure Hunt', 'Find the hidden treasure in the forest.', '200 Gold', 2),
+('Monster Hunt', 'Eliminate 10 monsters in the area.', '300 Gold', 1),
+('Collect Herbs', 'Gather 20 herbs for the alchemist.', '100 Gold', 1),
+('Guild Wars', 'Participate in the guild wars.', '800 Gold', 4),
+('The Great Escape', 'Help the prisoner escape.', '400 Gold', 3),
+('The Haunted House', 'Investigate the haunted house.', '600 Gold', 2),
+('The Ancient Prophecy', 'Uncover the secrets of the prophecy.', '900 Gold', 4);
 
--- Población de la tabla Players_Quests
-INSERT INTO Players_Quests (ID_player, ID_quest, status) VALUES 
+-- Insertar registros en Players_Quests
+INSERT INTO Players_Quests (ID_player, ID_quest, status) VALUES
 (1, 1, 'Completed'),
 (1, 2, 'In Progress'),
 (2, 1, 'Completed'),
-(3, 3, 'Not Started'),
-(4, 4, 'Not Started'),
-(5, 5, 'In Progress'),
+(2, 3, 'Not Started'),
+(3, 4, 'Completed'),
+(4, 2, 'In Progress'),
+(5, 5, 'Not Started'),
 (6, 6, 'Completed'),
-(7, 7, 'Not Started'),
-(8, 8, 'Completed'),
-(9, 9, 'In Progress'),
-(10, 10, 'Not Started');
+(7, 7, 'In Progress'),
+(8, 8, 'Not Started');
 
--- Población de la tabla Guilds
-INSERT INTO Guilds (guild_name, guild_description, creation_date) VALUES 
-('Los Valientes', 'Una guild de guerreros fuertes.', NOW()),
-('Los Sabios', 'Una guild de magos y eruditos.', NOW()),
-('Los Exploradores', 'Una guild dedicada a la exploración.', NOW()),
-('Los Guardianes', 'Una guild protectora de los débiles.', NOW()),
-('Los Cazadores', 'Una guild de cazadores y guerreros.', NOW());
+-- Insertar registros en Guilds
+INSERT INTO Guilds (guild_name, ID_leader) VALUES
+('Warriors Guild', 1),
+('Mages Guild', 2),
+('Rogue Brotherhood', 3),
+('Clerics of Light', 4),
+('Adventurers Alliance', 5),
+('The Fellowship', 6),
+('Guardians of the Realm', 7),
+('The Hidden Order', 8),
+('Order of the Dragon', 9),
+('The Fellowship of the Ring', 10);
 
--- Población de la tabla Guilds_Players
-INSERT INTO Guilds_Players (ID_guild, ID_player, join_date) VALUES 
-(1, 1, NOW()),
-(1, 2, NOW()),
-(2, 3, NOW()),
-(2, 4, NOW()),
-(3, 5, NOW()),
-(3, 6, NOW()),
-(4, 7, NOW()),
-(4, 8, NOW()),
-(5, 9, NOW()),
-(5, 10, NOW());
+-- Insertar registros en Guild_Members
+INSERT INTO Guild_Members (ID_guild, ID_player) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 6),
+(4, 7),
+(4, 8),
+(5, 9),
+(5, 10);
+
+-- Insertar registros en Virtual_Items
+INSERT INTO Virtual_Items (ID_player, item_name, item_description, price, category) VALUES
+(1, 'Healing Potion', 'Restores 50 health points.', 5.00, 'Potion'),
+(2, 'Mana Potion', 'Restores 50 mana points.', 5.00, 'Potion'),
+(3, 'Sword of Destiny', 'A powerful sword for heroes.', 150.00, 'Weapon'),
+(4, 'Shield of Valor', 'Protects you in battle.', 100.00, 'Armor'),
+(5, 'Ring of Strength', 'Increases strength by 10.', 75.00, 'Accessory'),
+(6, 'Boots of Speed', 'Increases movement speed.', 50.00, 'Accessory'),
+(7, 'Scroll of Fireball', 'Casts a powerful fireball.', 25.00, 'Spell'),
+(8, 'Plate Armor', 'Heavy armor for warriors.', 200.00, 'Armor'),
+(9, 'Bow of the Hunter', 'A bow for skilled archers.', 120.00, 'Weapon'),
+(10, 'Staff of Wisdom', 'A staff that boosts intelligence.', 90.00, 'Weapon');
+
+-- Insertar registros en Items_Used
+INSERT INTO Items_Used (ID_character, ID_item) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 6),
+(4, 7),
+(5, 8),
+(6, 9),
+(7, 10);
+
+-- Insertar registros en Fights
+INSERT INTO Fights (ID_character, enemy_name, result) VALUES
+(1, 'Goblin', 'Win'),
+(2, 'Troll', 'Lose'),
+(3, 'Dragon', 'Win'),
+(4, 'Bandit', 'Draw'),
+(5, 'Wolf', 'Win'),
+(6, 'Orc', 'Lose'),
+(7, 'Vampire', 'Win'),
+(8, 'Zombie', 'Draw'),
+(9, 'Mage', 'Lose'),
+(10, 'Knight', 'Win');
+
+-- Insertar registros en Game_Sessions
+INSERT INTO Game_Sessions (ID_character, duration, score) VALUES
+(1, 30, 100),
+(2, 45, 150),
+(3, 60, 200),
+(4, 25, 80),
+(5, 35, 120),
+(6, 50, 180),
+(7, 40, 160),
+(8, 55, 170),
+(9, 20, 70),
+(10, 15, 60);
+
+-- Insertar registros en Audit_Support_Service
+INSERT INTO Audit_Support_Service (ID_ticket, done_action, previous_status, new_status) VALUES
+(1, 'Create', 'Open', 'In Progress'),
+(2, 'Update', 'In Progress', 'Resolved'),
+(3, 'Close', 'Resolved', 'Closed'),
+(4, 'Create', 'Open', 'In Progress'),
+(5, 'Update', 'Open', 'In Progress'),
+(6, 'Close', 'In Progress', 'Resolved'),
+(7, 'Create', 'Open', 'In Progress'),
+(8, 'Update', 'Resolved', 'Closed'),
+(9, 'Create', 'Open', 'In Progress'),
+(10, 'Close', 'Open', 'Resolved');
