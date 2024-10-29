@@ -24,7 +24,7 @@ CREATE TABLE Characters (
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Crear la tabla Player_Stats (Tabla adicional)
+-- Crear la tabla Player_Stats
 CREATE TABLE Player_Stats (
     ID_stat INT PRIMARY KEY AUTO_INCREMENT,
     ID_player INT,
@@ -142,7 +142,7 @@ CREATE TABLE Fights (
     FOREIGN KEY (ID_character) REFERENCES Characters(ID_character)
 );
 
--- Crear la tabla Game_Sessions (Tabla de hechos)
+-- Crear la tabla Game_Sessions
 CREATE TABLE Game_Sessions (
     ID_session INT PRIMARY KEY AUTO_INCREMENT,
     ID_character INT,
