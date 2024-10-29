@@ -265,3 +265,18 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+
+-- Trigger 3: Inserta a la tabla de auditoría cuando se modifica la tabla Support_and_Customer_Service
+
+DROP TRIGGER IF EXISTS Audit_Support_Ticket;
+
+DELIMITER //
+CREATE TRIGGER Audit_Support_Ticket
+AFTER INSERT ON Support_and_Customer_Service
+FOR EACH ROW
+BEGIN
+    INSERT INTO Audit_Support_Service (ID_ticket, Action, Change_Date, Previous_Status, New_Status)
+    VALUES (NEW.ID_ticket, 'Create', NOW(), NULL, NEW.ticket_status);
+END //
+DELIMITER ;
