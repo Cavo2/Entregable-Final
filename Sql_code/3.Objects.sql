@@ -267,7 +267,7 @@ END //
 DELIMITER ;
 
 
--- Trigger 3: Inserta a la tabla de auditoría cuando se modifica la tabla Support_and_Customer_Service
+-- Trigger 3: Inserta a la tabla de auditoría un registro cuando se crea un ticket en la tabla Support_and_Customer_Service
 
 DROP TRIGGER IF EXISTS Audit_Support_Ticket;
 
